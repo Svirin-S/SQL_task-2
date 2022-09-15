@@ -1,3 +1,4 @@
+
 create table if not exists music_genre(
 	mg_id serial primary key, 
 	name_mg varchar (60) unique not null	
@@ -5,8 +6,7 @@ create table if not exists music_genre(
 
 create table if not exists performers(
 	perf_id serial primary key, 
-	name_perf varchar (60) unique not null,
-	mg_id INTEGER NOT NULL references music_genre(mg_id)
+	name_perf varchar (60) unique not null	
 );
 
 create table if not exists music_genreperformers(
@@ -19,7 +19,6 @@ create table if not exists albums(
 	alb_if serial primary key,
 	name_alb varchar (60) unique not null,
 	Year_of_release int,
-	perf_id integer references performers(perf_id),
 	check(Year_of_release > 1950 AND Year_of_release < 2023)
 );
 
@@ -41,8 +40,6 @@ create table if not exists collection(
 	coll_id serial primary key,
 	name_coll varchar (60) unique not null,
 	Year_of_release_coll int,
-	tracks_id integer references tracks(tracks_id),
-	alb_if integer references albums(alb_if),
 	check (Year_of_release_coll > 1950 and Year_of_release_coll < 2023)
 );
 
@@ -53,5 +50,3 @@ create table if not exists trackscollection(
 	CONSTRAINT tc PRIMARY KEY (tracks_id, coll_id)
 );
 
-
-	
